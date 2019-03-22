@@ -23,6 +23,8 @@ _The program uses the following specifications:_
 
 Requirements Software:
 
+Node Package Manager
+
 Clone this repository: $ git clone repo name
 Change into the work directory: $ cd galactic-age-calculator
 
