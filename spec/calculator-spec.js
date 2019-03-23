@@ -1,4 +1,12 @@
-import Calculator from './../src/Calculator.js';
+import { Calculator, multiplyAndRound } from './../src/Calculator.js';
+
+describe('multiplyAndRound', function(){
+    it('tests whether function returns correct value', function(){
+      let factor1 = 30;
+      let factor2 = 0.62;
+      expect(multiplyAndRound(factor1, factor2)).toEqual('18');
+    });
+});
 
 describe('Calculator', function(){
   let birthday;
@@ -23,22 +31,22 @@ describe('Calculator', function(){
   });
 
   it('tests whether Mercury age is calculated correctly', function(){
-    mercuryAge = calc.calculateAge() * .24;
+    let mercuryAge = multiplyAndRound(calc.calculateAge(), .24);
     expect(calc.calculateMercuryAge()).toEqual(mercuryAge);
   });
 
   it('tests whether Venus age is calculated correctly', function(){
-    venusAge = calc.calculateAge() * .62;
-    expect(calc.calculateVenusAge()).toEqua(venusAge);
+    let venusAge = multiplyAndRound(calc.calculateAge(), .62);
+    expect(calc.calculateVenusAge()).toEqual(venusAge);
   });
 
   it('tests whether Mars age is calculated correctly', function(){
-    marsAge = calc.calculateAge() * 1.88;
+    let marsAge = multiplyAndRound(calc.calculateAge(), 1.88);
     expect(calc.calculateMarsAge()).toEqual(marsAge);
   });
 
   it('tests whether Jupiter age is calculated correctly', function(){
-    jupiterAge = calc.calculateAge() * 11.86;
+    let jupiterAge = multiplyAndRound(calc.calculateAge(), 11.86);
     expect(calc.calculateJupiterAge()).toEqual(jupiterAge);
   });
 });
