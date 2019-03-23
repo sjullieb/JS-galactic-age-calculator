@@ -15,11 +15,11 @@ describe('Calculator', function(){
 
   it('tests whether the age is calculated correctly when birthday before today', function(){
     calc.birthday = new Date(2000, 1, 1);
-    expect(calc.calculateAge()).toEqual(18);
+    expect(calc.calculateAge()).toEqual(19);
   });
 
   it('tests whether age is calculated correctly when birthday if after today this year', function(){
-    expect(calc.calculateAge()).toEqual(19);
+    expect(calc.calculateAge()).toEqual(18);
   });
 
   it('tests whether Mercury age is calculated correctly', function(){

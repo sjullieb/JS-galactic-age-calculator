@@ -5,7 +5,13 @@ export  default class Calculator{
   }
 
   calculateAge(){
-    return this.birthday;
+    let today = new Date();
+    let age = today.getYear() - this.birthday.getYear();
+    
+    if (((today.getMonth() == this.birthday.getMonth()) && (today.getDay() < this.birthday.getDay())) || (today.getMonth() < this.birthday.getMonth())){
+      age --;
+    }
+    return age;
   }
 
   calculateMercuryAge(){ // A Mercury year is .24 Earth year
@@ -22,5 +28,5 @@ export  default class Calculator{
 
   calculateJupiterAge(){ // A Jupiter year is 11.86 Earth years.
     return this.birthday;
-  }  
+  }
 }
