@@ -18,9 +18,9 @@ describe('Calculator', function(){
   beforeEach(function(){
     birthday = new Date(2000, 8, 29);
     calc = new Calculator(birthday);
-    gender = 'male';
-    lifestyle = 5;
-    health = 5;
+    gender = 'M';
+    lifestyle = 10;
+    health = 10;
   });
 
   it('tests whether constructor saves the correct birthday', function(){
@@ -62,7 +62,11 @@ describe('Calculator', function(){
   //   expect(calc.calculateJupiterAge()).toEqual(jupiterAge);
   // });
 
-  it('tests whether life expectancy calculates correctly', function(){
-    calculateLifeExpectancy(gender, health, lifestyle);
+  it('tests whether life expectancy calculates correctly for M', function(){
+    expect(calc.calculateLifeExpectancy(gender, health, lifestyle)).toEqual(95);
+  });
+
+  it('tests whether life expectancy is calculated correctly for F', function(){
+    expect(calc.calculateLifeExpectancy("F", health, lifestyle)).toEqual(100);
   });
 });

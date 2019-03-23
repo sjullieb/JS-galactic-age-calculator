@@ -46,6 +46,11 @@ export class Calculator{
   // }
 
   calculateLifeExpectancy(gender, health, lifestyle){
-    return 90;
+    let baseExp = 90;
+    if (gender == "M"){
+      baseExp = 85;
+    }
+    baseExp += health - 5 + lifestyle - 5;
+    return baseExp;
   }
 }
