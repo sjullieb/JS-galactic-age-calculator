@@ -1,4 +1,5 @@
 const planetConvertion = {
+  'Earth' : 1,
   'Mercury' : .24,
   'Venus' : .62,
   'Mars' : 1.88,
@@ -10,12 +11,15 @@ export function multiplyAndRound (factor1, factor2){
 }
 
 export class Calculator{
-  constructor (birthday)
+  constructor (birthday, gender, health, lifestyle)
   {
     this.birthday = birthday;
+    this.gender = gender;
+    this.health = health;
+    this.lifestyle = lifestyle;
   }
 
-  calculateAge(){
+  getAge(){
     let today = new Date();
     let age = today.getYear() - this.birthday.getYear();
 
@@ -25,32 +29,28 @@ export class Calculator{
     return age;
   }
 
-  calculateAgeOnPlanet(planet){
-    return multiplyAndRound(this.calculateAge(this.birthday), planetConvertion[planet]);
+  getAgeOnPlanet(planet){
+    let earthAge = this.getAge(this.birthday);
+    return this.getYearsOnPlanet(earthAge, planet);
   }
 
-  // calculateMercuryAge(){ // A Mercury year is .24 Earth year
-  //   return multiplyAndRound(this.calculateAge(this.birthday), 0.24);//Math.floor(this.calculateAge(this.birthday) * 0.24).toFixed(0);
-  // }
-  //
-  // calculateVenusAge(){ // A Venus year is .62 Earth year
-  //   return multiplyAndRound(this.calculateAge(this.birthday), 0.62);
-  // }
-  //
-  // calculateMarsAge(){ // A Mars year is 1.88 Earth years
-  //   return multiplyAndRound(this.calculateAge(this.birthday), 1.88);
-  // }
-  //
-  // calculateJupiterAge(){ // A Jupiter year is 11.86 Earth years.
-  //   return multiplyAndRound(this.calculateAge(this.birthday), 11.86);
-  // }
+  getYearsOnPlanet(years, planet){
+    return multiplyAndRound(years, planetConvertion[planet]);
+  }
 
-  calculateLifeExpectancy(gender, health, lifestyle){
+  getEarthLifeExpectancy(){
     let baseExp = 90;
-    if (gender == "M"){
+    if (this.gender == "M"){
       baseExp = 85;
     }
-    baseExp += health - 5 + lifestyle - 5;
+    baseExp += this.health - 5 + this.lifestyle - 5;
     return baseExp;
+  }
+
+  getAdditionalLifeExpectancyOnPlanet(planet){
+    let earthAge = this.getAge(this.birthday);
+    let earthLifeExp = this.getEarthLifeExpectancy();
+    let additionalLifeExp = this.getYearsOnPlanet(earthLifeExp - earthAge, planet);
+    return additionalLifeExp;
   }
 }

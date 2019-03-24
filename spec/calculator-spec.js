@@ -17,10 +17,10 @@ describe('Calculator', function(){
 
   beforeEach(function(){
     birthday = new Date(2000, 8, 29);
-    calc = new Calculator(birthday);
     gender = 'M';
     lifestyle = 10;
     health = 10;
+    calc = new Calculator(birthday, gender, lifestyle, health);
   });
 
   it('tests whether constructor saves the correct birthday', function(){
@@ -29,44 +29,53 @@ describe('Calculator', function(){
 
   it('tests whether the age is calculated correctly when birthday before today', function(){
     calc.birthday = new Date(2000, 1, 1);
-    expect(calc.calculateAge()).toEqual(19);
+    expect(calc.getAge()).toEqual(19);
   });
 
   it('tests whether age is calculated correctly when birthday if after today this year', function(){
-    expect(calc.calculateAge()).toEqual(18);
+    expect(calc.getAge()).toEqual(18);
   });
 
-  it('tests whether age on the planet is calculated correctly', function(){
+  it('tests whether years on planet are calculated correctly', function(){
     let planet = 'Mercury';
-    let mercuryAge = multiplyAndRound(calc.calculateAge(), .24);
-    expect(calc.calculateAgeOnPlanet(planet)).toEqual(mercuryAge);
+    let earthYears = 10;
+    let mercuryYears = multiplyAndRound(earthYears, .24);
+    expect(calc.getYearsOnPlanet(earthYears, planet)).toEqual(mercuryYears);
   });
 
-  // it('tests whether Mercury age is calculated correctly', function(){
-  //   let mercuryAge = multiplyAndRound(calc.calculateAge(), .24);
-  //   expect(calc.calculateMercuryAge()).toEqual(mercuryAge);
-  // });
-  //
-  // it('tests whether Venus age is calculated correctly', function(){
-  //   let venusAge = multiplyAndRound(calc.calculateAge(), .62);
-  //   expect(calc.calculateVenusAge()).toEqual(venusAge);
-  // });
-  //
-  // it('tests whether Mars age is calculated correctly', function(){
-  //   let marsAge = multiplyAndRound(calc.calculateAge(), 1.88);
-  //   expect(calc.calculateMarsAge()).toEqual(marsAge);
-  // });
-  //
-  // it('tests whether Jupiter age is calculated correctly', function(){
-  //   let jupiterAge = multiplyAndRound(calc.calculateAge(), 11.86);
-  //   expect(calc.calculateJupiterAge()).toEqual(jupiterAge);
-  // });
+  it('tests whether age on the is calculated correctly', function(){
+    let planet = 'Mercury';
+    let earthAge = calc.getAge();
+    let mercuryAge = multiplyAndRound(earthAge, .24);
+    expect(calc.getAgeOnPlanet(planet)).toEqual(mercuryAge);
+  });
 
   it('tests whether life expectancy calculates correctly for M', function(){
-    expect(calc.calculateLifeExpectancy(gender, health, lifestyle)).toEqual(95);
+    expect(calc.getEarthLifeExpectancy()).toEqual(95);
   });
 
   it('tests whether life expectancy is calculated correctly for F', function(){
-    expect(calc.calculateLifeExpectancy("F", health, lifestyle)).toEqual(100);
+    calc.gender = "F";
+    expect(calc.getEarthLifeExpectancy()).toEqual(100);
   });
+
+  it('tests whether additional life expectancy is calculated correctly for different planets', function(){
+    let planet = 'Mercury';
+    let earthAge = calc.getAge();
+    let mercuryAge = multiplyAndRound(earthAge, .24);
+    let earthLifeExp = calc.getEarthLifeExpectancy();
+    let mercuryLifeExp = multiplyAndRound((earthLifeExp - earthAge), .24);
+    expect(calc.getAdditionalLifeExpectancyOnPlanet(planet)).toEqual(mercuryLifeExp);
+  });
+
+  // it('tests whether additional life expectancy is calculated correctly for different planets : negative number', function(){
+  //   calc.birthday = new Date(1900, 8, 29);
+  //   let planet = 'Earth';
+  //   let earthAge = calc.getAge();
+  //   let newEarthAge = multiplyAndRound(earthAge, 1);
+  //   let earthLifeExp = calc.getEarthLifeExpectancy();
+  //   let newEarthLifeExp = multiplyAndRound((earthLifeExp - earthAge), 1);
+  //   console.log(newEarthLifeExp);
+  //   expect(calc.getAdditionalLifeExpectancyOnPlanet(planet)).toEqual(newEarthLifeExp);
+  // });
 });
