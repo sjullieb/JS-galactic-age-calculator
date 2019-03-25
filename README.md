@@ -16,21 +16,18 @@ _The program uses the following specifications:_
   * in Venus years. (A Venus year is .62 Earth years.)
   * in Mars years. (A Mars year is 1.88 Earth years.)
   * in Jupiter years. (A Jupiter year is 11.86 Earth years.)
-* The program returns additional life expectancy based on the user's input.
+* The program returns additional life expectancy based on the user's gender, lifestyle and current health.
 * If the user has already surpassed the average life expectancy, the program returns the number of years they have lived past the life expectancy.
 
 ## Setup/Installation Requirements
 
-Requirements Software:
 
-Node Package Manager
-
-Clone this repository: $ git clone repo name
-Change into the work directory: $ cd galactic-age-calculator
-
-## Known Bugs
-
-_No known bugs_
+* Download and install Node.js
+* Clone this repository: $ git clone repo name
+* Change into the work directory: $ cd galactic-age-calculator
+* Run the command $ npm install
+* Run the command $ npm run build
+* Run the command $ npm run start
 
 ## Support and contact details
 
